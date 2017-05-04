@@ -69,19 +69,6 @@ public class BluetoothLeService extends Service {
             "android-er.ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA =
             "android-er.EXTRA_DATA";
-/*
-    public static String String_GENUINO101_ledService =
-            "19B10000-E8F2-537E-4F6C-D104768A1214";
-    public final static ParcelUuid ParcelUuid_GENUINO101_ledService =
-            ParcelUuid.fromString(String_GENUINO101_ledService);
-    public final static UUID UUID_GENUINO101_ledService =
-            UUID.fromString(String_GENUINO101_ledService);
-
-    public static String String_GENUINO101_switchChar =
-            "19B10001-E8F2-537E-4F6C-D104768A1214";
-    public final static UUID UUID_GENUINO101_switchChare =
-            UUID.fromString(String_GENUINO101_switchChar);
-            */
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -158,8 +145,6 @@ public class BluetoothLeService extends Service {
             final int heartRate = characteristic.getIntValue(format, 1);
             Log.d(TAG, String.format("Received heart rate: %d", heartRate));
             intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
-
-
         } else {
             // For all other profiles, writes the data formatted in HEX.
             final byte[] data = characteristic.getValue();
@@ -338,15 +323,6 @@ public class BluetoothLeService extends Service {
             return;
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-/*
-        // This is specific to Genuino 101 ledService.
-        if (UUID_GENUINO101_ledService.equals(characteristic.getUuid())) {
-            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                    UUID_GENUINO101_switchChare);
-            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-            mBluetoothGatt.writeDescriptor(descriptor);
-        }
-        */
     }
 
     /**
