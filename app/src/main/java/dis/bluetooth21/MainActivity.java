@@ -35,14 +35,15 @@ import android.os.SystemClock;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
+    static String HRnum;
     TextView heartRateNumber;
     TextView timer;
     ListView lv;
     private Handler pHandler = new Handler();
-    int num;
+
     boolean x;
     boolean isStart;
-    CoordinatorLayout cL;
+
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     int Seconds, Minutes, MilliSeconds, Hours ;
     private BluetoothAdapter mBluetoothAdapter;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        HRnum = "0";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         isStart=false;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-        /*
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        */
+
 
         btnScan = (Button)findViewById(R.id.scan);
         btnScan.setOnClickListener(new View.OnClickListener() {
@@ -314,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    /*
+
     public Runnable stopwatch = new Runnable() {
 
         public void run() {
@@ -345,44 +346,26 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             Log.d(getString(R.string.app_name) + " ChatList.updateTask()",
                     "updateTask run!");
-            if(x==true) {
-                num = num + 1;
-                if(num>108){
-                    x=false;
-                }
-            }else{
-                num=num-1;
-            }
+
             heartRateNumber = (TextView) findViewById(R.id.hrNum);
-            heartRateNumber.setText(""+num);
-            cL=(CoordinatorLayout) findViewById(R.id.bg);
-            if(num>100){
-                cL.setBackgroundColor(0xffff0000);
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(400);
-            }else if(num>80 && num<101){
-                cL.setBackgroundColor(0xffffff00);
-            }else{
-                cL.setBackgroundColor(0xffffffff);
-            }
+            heartRateNumber.setText(""+HRnum);
 
             if(isStart==true){
                 pHandler.postDelayed(updateTask,500);
 
             }else{
                 heartRateNumber.setText("Stop");
-                cL.setBackgroundColor(0xffffffff);
+
             }
         }
     };
     private void timestart(){
         if(isStart==false){
             isStart=true;
-            num=70;
             heartRateNumber = (TextView) findViewById(R.id.hrNum);
             timer = (TextView) findViewById(R.id.timer);
             timer.setText("00:00:00:00");
-            heartRateNumber.setText(""+num);
+            heartRateNumber.setText(""+HRnum);
             StartTime = SystemClock.uptimeMillis();
             pHandler.postDelayed(stopwatch, 0);
             pHandler.postDelayed(updateTask, 500);
@@ -392,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
             pHandler.postDelayed(updateTask, 0);
         }
     };
-    */
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -415,5 +398,9 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    public static void setNum(String num) {
+        HRnum = num;
     }
 }

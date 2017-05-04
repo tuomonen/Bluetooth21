@@ -3,9 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:orientation="vertical"
     tools:context="com.blogspot.android_er.androidblegatt.MainActivity">
+
+    <TextView
+        android:id="@+id/hrNum"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginRight="8dp"
+
+        android:layout_marginTop="8dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="134dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginRight="8dp"
+
+        android:layout_marginTop="8dp"
+
+        android:textAlignment="center" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,4 +68,5 @@
         android:id="@+id/lelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>
