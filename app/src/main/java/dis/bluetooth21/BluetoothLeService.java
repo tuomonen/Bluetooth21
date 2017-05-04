@@ -67,7 +67,7 @@ public class BluetoothLeService extends Service {
             "android-er.ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA =
             "android-er.EXTRA_DATA";
-
+/*
     public static String String_GENUINO101_ledService =
             "19B10000-E8F2-537E-4F6C-D104768A1214";
     public final static ParcelUuid ParcelUuid_GENUINO101_ledService =
@@ -79,6 +79,7 @@ public class BluetoothLeService extends Service {
             "19B10001-E8F2-537E-4F6C-D104768A1214";
     public final static UUID UUID_GENUINO101_switchChare =
             UUID.fromString(String_GENUINO101_switchChar);
+            */
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -162,7 +163,8 @@ public class BluetoothLeService extends Service {
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
                 for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
-                intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
+                intent.putExtra(EXTRA_DATA, new String(data) + "\n" +
+                        stringBuilder.toString());
             }
         }
 
@@ -177,10 +179,10 @@ public class BluetoothLeService extends Service {
             final StringBuilder stringBuilder = new StringBuilder(data.length);
             for(byte byteChar : data) {
                 stringBuilder.append(String.format("%02X ", byteChar));
-
                 Log.v(TAG, String.format("%02X ", byteChar));
             }
-            intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
+            intent.putExtra(EXTRA_DATA, new String(data) + "\n" +
+                    stringBuilder.toString());
         }
 
         sendBroadcast(intent);
@@ -332,7 +334,7 @@ public class BluetoothLeService extends Service {
             return;
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-
+/*
         // This is specific to Genuino 101 ledService.
         if (UUID_GENUINO101_ledService.equals(characteristic.getUuid())) {
             BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
@@ -340,6 +342,7 @@ public class BluetoothLeService extends Service {
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
         }
+        */
     }
 
     /**
